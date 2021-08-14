@@ -15,6 +15,15 @@
 		11F05CA126C7A6200056041B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11F05C9F26C7A6200056041B /* LaunchScreen.storyboard */; };
 		11F05CAC26C7A6210056041B /* SMCompositionalLayoutTutorialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CAB26C7A6210056041B /* SMCompositionalLayoutTutorialTests.swift */; };
 		11F05CB726C7A6210056041B /* SMCompositionalLayoutTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CB626C7A6210056041B /* SMCompositionalLayoutTutorialUITests.swift */; };
+		11F05CC726C7AC320056041B /* Autolayout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CC626C7AC320056041B /* Autolayout+Extensions.swift */; };
+		11F05CCA26C7B13D0056041B /* SMDataSourceWithCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CC926C7B13D0056041B /* SMDataSourceWithCompositionalLayout.swift */; };
+		11F05CCE26C7BEE20056041B /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CCC26C7BEE20056041B /* PhotoCollectionViewCell.swift */; };
+		11F05CCF26C7BEE20056041B /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F05CCD26C7BEE20056041B /* PhotoCollectionViewCell.xib */; };
+		11F05CD526C8234C0056041B /* HeaderSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CD326C8234C0056041B /* HeaderSupplementaryView.swift */; };
+		11F05CD626C8234D0056041B /* HeaderSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F05CD426C8234C0056041B /* HeaderSupplementaryView.xib */; };
+		11F05CD926C82D650056041B /* NewPhotoSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CD726C82D650056041B /* NewPhotoSupplementaryView.swift */; };
+		11F05CDA26C82D650056041B /* NewPhotoSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F05CD826C82D650056041B /* NewPhotoSupplementaryView.xib */; };
+		11F05CDC26C838630056041B /* SMDataSourceWithFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CDB26C838630056041B /* SMDataSourceWithFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +58,15 @@
 		11F05CB226C7A6210056041B /* SMCompositionalLayoutTutorialUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SMCompositionalLayoutTutorialUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11F05CB626C7A6210056041B /* SMCompositionalLayoutTutorialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMCompositionalLayoutTutorialUITests.swift; sourceTree = "<group>"; };
 		11F05CB826C7A6210056041B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11F05CC626C7AC320056041B /* Autolayout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Autolayout+Extensions.swift"; sourceTree = "<group>"; };
+		11F05CC926C7B13D0056041B /* SMDataSourceWithCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMDataSourceWithCompositionalLayout.swift; sourceTree = "<group>"; };
+		11F05CCC26C7BEE20056041B /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		11F05CCD26C7BEE20056041B /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		11F05CD326C8234C0056041B /* HeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSupplementaryView.swift; sourceTree = "<group>"; };
+		11F05CD426C8234C0056041B /* HeaderSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderSupplementaryView.xib; sourceTree = "<group>"; };
+		11F05CD726C82D650056041B /* NewPhotoSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhotoSupplementaryView.swift; sourceTree = "<group>"; };
+		11F05CD826C82D650056041B /* NewPhotoSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPhotoSupplementaryView.xib; sourceTree = "<group>"; };
+		11F05CDB26C838630056041B /* SMDataSourceWithFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMDataSourceWithFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +117,10 @@
 		11F05C9326C7A61F0056041B /* SMCompositionalLayoutTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				11F05CD026C8227D0056041B /* ReusableViews */,
+				11F05CCB26C7BECB0056041B /* Cells */,
+				11F05CC826C7B1230056041B /* DataSource */,
+				11F05CC526C7AC140056041B /* Extensions */,
 				11F05C9426C7A61F0056041B /* AppDelegate.swift */,
 				11F05C9626C7A61F0056041B /* SceneDelegate.swift */,
 				11F05C9826C7A61F0056041B /* ViewController.swift */,
@@ -126,6 +148,43 @@
 				11F05CB826C7A6210056041B /* Info.plist */,
 			);
 			path = SMCompositionalLayoutTutorialUITests;
+			sourceTree = "<group>";
+		};
+		11F05CC526C7AC140056041B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				11F05CC626C7AC320056041B /* Autolayout+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		11F05CC826C7B1230056041B /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				11F05CC926C7B13D0056041B /* SMDataSourceWithCompositionalLayout.swift */,
+				11F05CDB26C838630056041B /* SMDataSourceWithFlowLayout.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		11F05CCB26C7BECB0056041B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				11F05CCC26C7BEE20056041B /* PhotoCollectionViewCell.swift */,
+				11F05CCD26C7BEE20056041B /* PhotoCollectionViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		11F05CD026C8227D0056041B /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				11F05CD326C8234C0056041B /* HeaderSupplementaryView.swift */,
+				11F05CD426C8234C0056041B /* HeaderSupplementaryView.xib */,
+				11F05CD726C82D650056041B /* NewPhotoSupplementaryView.swift */,
+				11F05CD826C82D650056041B /* NewPhotoSupplementaryView.xib */,
+			);
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,7 +291,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				11F05CA126C7A6200056041B /* LaunchScreen.storyboard in Resources */,
+				11F05CCF26C7BEE20056041B /* PhotoCollectionViewCell.xib in Resources */,
 				11F05C9E26C7A6200056041B /* Assets.xcassets in Resources */,
+				11F05CD626C8234D0056041B /* HeaderSupplementaryView.xib in Resources */,
+				11F05CDA26C82D650056041B /* NewPhotoSupplementaryView.xib in Resources */,
 				11F05C9C26C7A61F0056041B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,9 +320,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11F05CC726C7AC320056041B /* Autolayout+Extensions.swift in Sources */,
+				11F05CCA26C7B13D0056041B /* SMDataSourceWithCompositionalLayout.swift in Sources */,
+				11F05CD926C82D650056041B /* NewPhotoSupplementaryView.swift in Sources */,
+				11F05CD526C8234C0056041B /* HeaderSupplementaryView.swift in Sources */,
 				11F05C9926C7A61F0056041B /* ViewController.swift in Sources */,
+				11F05CDC26C838630056041B /* SMDataSourceWithFlowLayout.swift in Sources */,
 				11F05C9526C7A61F0056041B /* AppDelegate.swift in Sources */,
 				11F05C9726C7A61F0056041B /* SceneDelegate.swift in Sources */,
+				11F05CCE26C7BEE20056041B /* PhotoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

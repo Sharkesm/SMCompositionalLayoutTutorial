@@ -73,7 +73,12 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
     }
     
     var sectionLayout = UICollectionViewCompositionalLayout { index, environment in
-        let itemsPerRow = index + 3
+
+        // Absolute item count
+        // let itemsPerRow = index + 3
+        // let fraction: CGFloat = (1 / CGFloat(itemsPerRow))
+
+        let itemsPerRow = environment.traitCollection.horizontalSizeClass == .compact ? 3 : 6
         let fraction: CGFloat = (1 / CGFloat(itemsPerRow))
         let inset: CGFloat = 2.5
         
@@ -98,9 +103,39 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
         return section
     }
     
+    var nestedGroupLayout: UICollectionViewCompositionalLayout {
+        
+        let inset: CGFloat = 2.5
+        
+        // Larger Item
+        let largestItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
+        let largestItem = NSCollectionLayoutItem(layoutSize: largestItemSize)
+        largestItem.contentInsets = .init(top: inset, leading: inset, bottom: inset, trailing: inset)
+        
+        // Smaller Item
+        let smallestItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5))
+        let smalletItem = NSCollectionLayoutItem(layoutSize: smallestItemSize)
+        smalletItem.contentInsets = .init(top: inset, leading: inset, bottom: inset, trailing: inset)
+        
+        // Groups
+        let verticalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.25), heightDimension: .fractionalHeight(1))
+        let verticalGroup = NSCollectionLayoutGroup.vertical(layoutSize: verticalGroupSize, subitems: [smalletItem])
+        
+        let horizontalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5))
+        let horizontalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: horizontalGroupSize, subitems: [largestItem, verticalGroup, verticalGroup])
+        
+        // Section
+        let section = NSCollectionLayoutSection(group: horizontalGroup)
+        section.contentInsets = .init(top: inset, leading: inset, bottom: inset, trailing: inset)
+        section.boundarySupplementaryItems = [sectionHeaderSupplementaryItem]
+       
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    
+    
     init(collectionView: UICollectionView) {
         self.collectionView = collectionView
-        let items: [Section.Item] = .init(repeating: .init(identifier: 10, title: "Title"), count: 9)
+        let items: [Section.Item] = .init(repeating: .init(identifier: 10, title: "Title"), count: 5)
         self.sections = .init(repeating: .init(items: items), count: 5)
         super.init()
         configCollectionView()
@@ -114,7 +149,7 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
         collectionView.showsHorizontalScrollIndicator = false
     
         /// Compsotional layout
-        collectionView.collectionViewLayout = sectionLayout
+        collectionView.collectionViewLayout = nestedGroupLayout
     }
 
     func registerCells() {

@@ -25,6 +25,7 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
     var layout: UICollectionViewLayout {
         let fraction: CGFloat = 1/3
         let inset: CGFloat = 2.5
+        let sectionInset: CGFloat = 16
         
         // Supplementary
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
@@ -45,12 +46,21 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(fraction))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
+        // Section Background Item
+        let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: "SectionBackground")
+        let backgroundInset: CGFloat = 8
+        backgroundItem.contentInsets = .init(top: backgroundInset, leading: backgroundInset, bottom: backgroundInset, trailing: backgroundInset)
+        
         // Section
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: inset, leading: inset, bottom: inset, trailing: inset)
+        section.contentInsets = .init(top: sectionInset, leading: sectionInset, bottom: sectionInset, trailing: sectionInset)
         section.boundarySupplementaryItems = [header]
+        section.decorationItems = [backgroundItem]
         
-        return UICollectionViewCompositionalLayout(section: section)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        layout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: "SectionBackground")
+        
+        return layout
     }
     
     init(collectionView: UICollectionView) {

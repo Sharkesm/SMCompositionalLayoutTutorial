@@ -24,6 +24,7 @@
 		11F05CD926C82D650056041B /* NewPhotoSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CD726C82D650056041B /* NewPhotoSupplementaryView.swift */; };
 		11F05CDA26C82D650056041B /* NewPhotoSupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F05CD826C82D650056041B /* NewPhotoSupplementaryView.xib */; };
 		11F05CDC26C838630056041B /* SMDataSourceWithFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F05CDB26C838630056041B /* SMDataSourceWithFlowLayout.swift */; };
+		11F0DEEA26C9536C001DFE6A /* BackgroundSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0DEE926C9536C001DFE6A /* BackgroundSupplementaryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		11F05CD726C82D650056041B /* NewPhotoSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhotoSupplementaryView.swift; sourceTree = "<group>"; };
 		11F05CD826C82D650056041B /* NewPhotoSupplementaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPhotoSupplementaryView.xib; sourceTree = "<group>"; };
 		11F05CDB26C838630056041B /* SMDataSourceWithFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMDataSourceWithFlowLayout.swift; sourceTree = "<group>"; };
+		11F0DEE926C9536C001DFE6A /* BackgroundSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSupplementaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 				11F05CD426C8234C0056041B /* HeaderSupplementaryView.xib */,
 				11F05CD726C82D650056041B /* NewPhotoSupplementaryView.swift */,
 				11F05CD826C82D650056041B /* NewPhotoSupplementaryView.xib */,
+				11F0DEE926C9536C001DFE6A /* BackgroundSupplementaryView.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			files = (
 				11F05CC726C7AC320056041B /* Autolayout+Extensions.swift in Sources */,
 				11F05CCA26C7B13D0056041B /* SMDataSourceWithCompositionalLayout.swift in Sources */,
+				11F0DEEA26C9536C001DFE6A /* BackgroundSupplementaryView.swift in Sources */,
 				11F05CD926C82D650056041B /* NewPhotoSupplementaryView.swift in Sources */,
 				11F05CD526C8234C0056041B /* HeaderSupplementaryView.swift in Sources */,
 				11F05C9926C7A61F0056041B /* ViewController.swift in Sources */,

@@ -22,24 +22,33 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
     var collectionView: UICollectionView!
     let sections: [Section]
     
-    var layout: UICollectionViewLayout {
-        let fraction: CGFloat = 1/3
-        let inset: CGFloat = 2.5
-        let sectionInset: CGFloat = 16
-        
+    var sectionHeaderSupplementaryItem: NSCollectionLayoutBoundarySupplementaryItem {
         // Supplementary
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "header", alignment: .top)
         header.pinToVisibleBounds = true
-        
+    
+        return header
+    }
+    
+    var headerSupplementaryItem: NSCollectionLayoutBoundarySupplementaryItem {
         // Supplementary Item
         let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(40))
         let headerAnchor = NSCollectionLayoutAnchor(edges: .bottom, absoluteOffset: .zero)
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "new-photo", containerAnchor: headerAnchor)
         
+        return headerItem
+    }
+    
+    // Compsotional layout with decorated sections and items
+    var layout: UICollectionViewLayout {
+        let fraction: CGFloat = 1/3
+        let inset: CGFloat = 2.5
+        let sectionInset: CGFloat = 16
+        
         // Item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fraction), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize, supplementaryItems: [headerItem])
+        let item = NSCollectionLayoutItem(layoutSize: itemSize, supplementaryItems: [headerSupplementaryItem])
         item.contentInsets = .init(top: inset, leading: inset, bottom: inset, trailing: inset)
         
         // Group
@@ -54,13 +63,39 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
         // Section
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: sectionInset, leading: sectionInset, bottom: sectionInset, trailing: sectionInset)
-        section.boundarySupplementaryItems = [header]
+        section.boundarySupplementaryItems = [sectionHeaderSupplementaryItem]
         section.decorationItems = [backgroundItem]
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         layout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: "SectionBackground")
         
         return layout
+    }
+    
+    var sectionLayout = UICollectionViewCompositionalLayout { index, environment in
+        let itemsPerRow = index + 3
+        let fraction: CGFloat = (1 / CGFloat(itemsPerRow))
+        let inset: CGFloat = 2.5
+        
+        // Item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fraction), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+        
+        // Group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(fraction))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        // Section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+        
+        // Supplementary Item
+        let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
+        let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
+        section.boundarySupplementaryItems = [headerItem]
+        
+        return section
     }
     
     init(collectionView: UICollectionView) {
@@ -79,7 +114,7 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
         collectionView.showsHorizontalScrollIndicator = false
     
         /// Compsotional layout
-        collectionView.collectionViewLayout = layout
+        collectionView.collectionViewLayout = sectionLayout
     }
 
     func registerCells() {

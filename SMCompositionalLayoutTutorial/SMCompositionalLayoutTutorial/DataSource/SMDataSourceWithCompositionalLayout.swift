@@ -128,14 +128,43 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
         let section = NSCollectionLayoutSection(group: horizontalGroup)
         section.contentInsets = .init(top: inset, leading: inset, bottom: inset, trailing: inset)
         section.boundarySupplementaryItems = [sectionHeaderSupplementaryItem]
-       
+        section.orthogonalScrollingBehavior = .groupPaging
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
     
+    var animatedGroupedLayout: UICollectionViewCompositionalLayout {
+        let fraction: CGFloat = 1.0 / 3.0
+        
+        // Item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        // Group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fraction), heightDimension: .fractionalWidth(fraction))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        // Section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 100, leading: 2.5, bottom: 0, trailing: 2.5)
+        section.orthogonalScrollingBehavior = .groupPaging
+        section.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            items.forEach { item in
+                let layoutWidth = environment.container.contentSize.width
+                let distanceFromCenter = abs((item.frame.midX - offset.x) - layoutWidth / 2.0)
+                let minScale: CGFloat = 0.7
+                let maxScale: CGFloat = 1.1
+                let scale = max(maxScale - (distanceFromCenter / layoutWidth), minScale)
+                item.transform = .init(scaleX: scale, y: scale)
+            }
+        }
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
     
     init(collectionView: UICollectionView) {
         self.collectionView = collectionView
-        let items: [Section.Item] = .init(repeating: .init(identifier: 10, title: "Title"), count: 5)
+        let items: [Section.Item] = .init(repeating: .init(identifier: 10, title: "Title"), count: 10)
         self.sections = .init(repeating: .init(items: items), count: 5)
         super.init()
         configCollectionView()
@@ -149,7 +178,7 @@ class SMDataSourceWithCompositionalLayout: NSObject, SMDataSourceProtocol {
         collectionView.showsHorizontalScrollIndicator = false
     
         /// Compsotional layout
-        collectionView.collectionViewLayout = nestedGroupLayout
+        collectionView.collectionViewLayout = animatedGroupedLayout
     }
 
     func registerCells() {
